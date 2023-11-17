@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- Bootstrap min css-->
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="/css/css/style.css">
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url('/images/about.jpg');">
+			<div class="inner">
+				<form th:action="@{/users/register}"
+					  th:method="post"
+					  th:object="${userModel}">
+
+					<h3>Registration Form</h3>
+					<div class="form-group">
+						<div class="form-wrapper">
+							<label for="firstName">First Name</label>
+							<input  id="firstName"
+									th:field="*{firstName}"
+									th:errorclass="is-invalid"
+									type="text"
+									class="form-control"
+									placeholder="First name"/>
+							<div class="error-message" th:each="error : ${#fields.errors('firstName')}"
+								 th:text="${error}">
+							</div>
+						</div>
+						<div class="form-wrapper">
+							<label for="lastName">Last Name</label>
+							<input id="lastName"
+								   th:field="*{lastName}"
+								   th:errorclass="is-invalid"
+								   type="text"
+								   class="form-control"
+								   placeholder="Last name"/>
+							<div class="error-message" th:each="error : ${#fields.errors('lastName')}"
+								 th:text="${error}">
+							</div>
+						</div>
+					</div>
+					<div class="form-wrapper">
+						<label for="email">Email</label>
+						<input th:field="*{email}"
+							   th:errorclass="is-invalid"
+							   id="email"
+							   type="text"
+							   class="form-control"
+							   placeholder="Email">
+						<div class="error-message" th:each="error : ${#fields.errors('email')}"
+							 th:text="${error}">
+						</div>
+					</div>
+					<div class="form-wrapper">
+						<label for="password">Password</label>
+						<input th:field="*{password}"
+							   th:errorclass="is-invalid"
+							   id="password"
+							   type="password"
+							   class="form-control"
+							   placeholder="Password">
+						<div class="error-message" th:each="error : ${#fields.errors('password')}"
+							 th:text="${error}">
+						</div>
+					</div>
+					<div class="form-wrapper">
+						<label for="confirmPassword">Confirm Password</label>
+						<input th:field="*{confirmPassword}"
+							   th:errorclass="is-invalid"
+							   id="confirmPassword"
+							   type="password"
+							   class="form-control"
+							   placeholder="Confirm Password">
+						<div class="error-message" th:each="error : ${#fields.errors('confirmPassword')}"
+							 th:text="${error}">
+						</div>
+					</div>
+					<button type="submit" value="Register">Register Now</button>
+				</form>
+			</div>
+		</div>
+		
+	</body>
+</html>

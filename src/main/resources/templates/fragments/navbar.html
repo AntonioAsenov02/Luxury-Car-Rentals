@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+</head>
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="/">Luxury<span>Rentals</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa-solid fa-bars"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/info/about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+                    <li class="nav-item"><a href="info/contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="/users/logout" class="nav-link">Logout</a></li>
+                </th:block>
+
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a th:href="@{/info/about}" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/cars/all" class="nav-link">Cars</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="/info/contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="/users/login" class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="/users/register" class="nav-link">Register</a></li>
+                </th:block>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/scss/bootstrap/vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/scss/bootstrap/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/scss/bootstrap/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/scss/bootstrap/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/scss/bootstrap/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/scss/bootstrap/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('/images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form"
+					  th:action="@{/users/login}"
+					  th:method="post">
+
+					<span class="login100-form-logo">
+						<i class="fa-solid fa-mountain-sun"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100"
+							   id="email"
+							   name="email"
+							   th:value="*{email}"
+							   type="text"
+							   placeholder="Username">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100"
+							   id="password"
+							   name="password"
+							   type="password"
+							   placeholder="Password">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="contact100-form-checkbox">
+						<input
+								class="input-checkbox100"
+								id="remember-me"
+								name="remember-me"
+								type="checkbox">
+						<label class="label-checkbox100" for="remember-me">Remember me</label>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-90">
+						<a class="txt1" href="#">
+							Forgot Password?
+						</a>
+					</div>
+				</form>
+
+				<p th:if="${badCredentials}" class="errors alert alert-danger">
+					Invalid username or password.
+				</p>
+
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head}"></head>
+  <body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <!-- END nav -->
+
+	<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/our_fleet.png');" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+				<div class="col-md-9 ftco-animate pb-5">
+					<p class="breadcrumbs">
+						<span>
+							<a href="/">Home
+								<i class="fa-solid fa-house"></i>
+							</a>
+						</span>
+					</p>
+					<h1 class="mb-3 bread">Choose Your Car</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+		
+
+		<section class="ftco-section bg-light">
+    	<div class="container">
+    		<div class="row"
+				 th:each="car : ${allCars.getContent()}"
+				 th:object="${car}">
+    			<div class="col-md-4">
+    				<div class="car-wrap rounded ftco-animate">
+    					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
+    					</div>
+    					<div class="text">
+    						<h2 class="mb-0"><a href="car-single.html" th:text="|*{brand} *{model}|"></a></h2>
+    						<div class="d-flex mb-3">
+	    						<span class="cat" th:text="*{brand}">Cheverolet</span>
+								<p class="price ml-auto" th:text=" '$' + *{pricePerHour} + '/hour' ">$500</p>
+    						</div>
+    						<p class="d-flex mb-0 d-block">
+								<a href="#" class="btn btn-primary py-2 mr-1">Book now</a>
+								<a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a>
+							</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-4">
+    				<div class="car-wrap rounded ftco-animate">
+    					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
+    					</div>
+    					<div class="text">
+    						<h2 class="mb-0"><a href="car-single.html" th:text="|*{brand} *{model}|">Range Rover</a></h2>
+    						<div class="d-flex mb-3">
+	    						<span class="cat" th:text="*{brand}">Subaru</span>
+	    						<p class="price ml-auto" th:text=" '$' + *{pricePerDay} + '/day' ">$500</p>
+    						</div>
+    						<p class="d-flex mb-0 d-block">
+								<a href="#" class="btn btn-primary py-2 mr-1">Book now</a>
+								<a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a>
+							</p>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-4">
+    				<div class="car-wrap rounded ftco-animate">
+    					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
+    					</div>
+    					<div class="text">
+    						<h2 class="mb-0"><a href="car-single.html" th:text="|*{brand} *{model}|">Mercedes Grand Sedan</a></h2>
+    						<div class="d-flex mb-3">
+	    						<span class="cat" th:text="*{brand}">Cheverolet</span>
+	    						<p class="price ml-auto" th:text=" '$' + *{pricePerMonth} + '/month' ">$500</p>
+    						</div>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+
+    	</div>
+		<div class="row mt-5">
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<li class="page-item" th:classappend="${allCars.hasPrevious() ? '' : 'disabled'}">
+							<a th:if="${allCars.hasPrevious()}"
+							   th:href="@{/cars/all(size=${allCars.getSize()},page=${allCars.getNumber() - 1})}">&lt;
+							</a>
+							<a th:unless="${allCars.hasPrevious()}">&lt;</a>
+						</li>
+						<li th:classappend="${allCars.isFirst()} ? 'active' : ''">
+							<a th:unless="${allCars.isFirst()}"
+							   th:href="@{/cars/all(size=${allCars.getSize()},page=0)}">1
+							</a>
+							<a th:if="${allCars.isFirst()}">1</a>
+						</li>
+						<li th:classappend="${allCars.pageable.getPageNumber() == 1} ? 'active' : ''">
+							<a th:unless="${allCars.pageable.getPageNumber() == 1}"
+							   th:href="@{/cars/all(size=${allCars.getSize()},page=1)}">2
+							</a>
+							<a th:if="${allCars.pageable.getPageNumber() == 1}">2</a>
+						</li>
+						<li th:classappend="${allCars.pageable.getPageNumber() == 2} ? 'active' : ''">
+							<a th:unless="${allCars.pageable.getPageNumber() == 2}"
+							   th:href="@{/cars/all(size=${allCars.getSize()},page=2)}">3
+							</a>
+							<a th:if="${allCars.pageable.getPageNumber() == 2}">3</a>
+						</li>
+						<li th:classappend="${allCars.pageable.getPageNumber() == 3} ? 'active' : ''">
+							<a th:unless="${allCars.pageable.getPageNumber() == 3}"
+							   th:href="@{/cars/all(size=${allCars.getSize()},page=3)}">4
+							</a>
+							<a th:if="${allCars.pageable.getPageNumber() == 3}">4</a>
+						</li>
+						<li th:classappend="${allCars.pageable.getPageNumber() == 4} ? 'active' : ''">
+							<a th:unless="${allCars.pageable.getPageNumber() == 4}"
+							   th:href="@{/cars/all(size=${allCars.getSize()},page=4)}">5
+							</a>
+							<a th:if="${allCars.pageable.getPageNumber() == 4}">5</a>
+						</li>
+						<li class="page-item" th:classappend="${allCars.hasNext() ? '' : 'disabled'}">
+							<a th:if="${allCars.hasNext()}"
+							   th:href="@{/cars/all(size=${allCars.getSize()},page=${allCars.getNumber() + 1})}">&gt;
+							</a>
+							<a th:unless="${allCars.hasNext()}">&gt;</a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+    </section>
+    
+
+    <footer th:replace="~{fragments/footer}"></footer>
+    
+  
+
+  <!-- loader -->
+  <div th:replace="~{fragments/loader}"></div>
+    
+  </body>
+</html>
