@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}"></head>
+<body>
+<nav th:replace="~{fragments/navbar}"></nav>
+<!-- END nav -->
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_7.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs">
+						<span>
+							<a href="/">Home
+								<i class="fa-solid fa-house"></i>
+							</a>
+						</span>
+                </p>
+                <h1 class="mb-3 bread">Add New Car</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="ftco-section contact-section">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-8 block-9 mb-md-5">
+                <form class="bg-light p-5 contact-form"
+                      th:action="@{/cars/add}"
+                      th:method="post"
+                      th:object="${carAddDTO}">
+
+                    <div class="form-group">
+                        <div class="form-wrapper">
+                            <label for="brand">Brand</label>
+                            <input  id="brand"
+                                    th:field="*{brand}"
+                                    th:errorclass="is-invalid"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Brand"/>
+                            <div class="error-message text-danger" th:each="error : ${#fields.errors('brand')}"
+                                 th:text="${error}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-wrapper">
+                            <label for="model">Model</label>
+                            <input  id="model"
+                                    th:field="*{model}"
+                                    th:errorclass="is-invalid"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Model"/>
+                            <div class="error-message text-danger" th:each="error : ${#fields.errors('model')}"
+                                 th:text="${error}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-wrapper">
+                            <label for="year">Year</label>
+                            <input id="year"
+                                   th:field="*{year}"
+                                   th:errorclass="is-invalid"
+                                   type="number"
+                                   min="1930" step="1"
+                                   class="form-control"
+                                   placeholder="Year"/>
+                            <div class="error-message text-danger" th:each="error : ${#fields.errors('year')}"
+                                 th:text="${error}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-wrapper">
+                            <label for="transmission">Transmission</label>
+                            <select id="transmission"
+                                    th:field="*{transmission}"
+                                    th:errorclass="is-invalid"
+                                    class="form-control">
+                                <option value="">- Select transmission type -</option>
+                                <option th:each="t : ${T(com.example.luxurycarrentals.model.enums.TransmissionEnum).values()}"
+                                        th:text="${t}"
+                                        th:value="${t}"
+                                        th:selected="${t} == *{transmission}">
+                                    Transmission type
+                                </option>
+                            </select>
+                            <div class="error-message text-danger" th:each="error : ${#fields.errors('transmission')}"
+                                 th:text="${error}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description"
+                               th:field="*{description}"
+                               th:errorclass="is-invalid"
+                               type="textarea"
+                               rows="4"
+                               class="form-control"
+                               placeholder="Write a description"></textarea>
+                        <div class="error-message text-danger" th:each="error : ${#fields.errors('description')}"
+                             th:text="${error}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fuel">Fuel</label>
+                        <select id="fuel"
+                                th:field="*{fuel}"
+                                th:errorclass="is-invalid"
+                                class="form-control">
+                            <option value="">- Select fuel type -</option>
+                            <option th:each="f : ${T(com.example.luxurycarrentals.model.enums.FuelEnum).values()}"
+                                    th:text="${f}"
+                                    th:value="${f}"
+                                    th:selected="${f} == *{fuel}">
+                                Transmission type
+                            </option>
+                        </select>
+                        <div class="error-message text-danger" th:each="error : ${#fields.errors('fuel')}"
+                             th:text="${error}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">Image URL</label>
+                        <input id="imageUrl"
+                               th:field="*{imageUrl}"
+                               th:errorclass="is-invalid"
+                               type="text"
+                               class="form-control"
+                               placeholder="Put vehicle image URL here">
+                        <div class="error-message text-danger" th:each="error : ${#fields.errors('imageUrl')}"
+                             th:text="${error}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-wrapper">
+                            <label for="mileage">Mileage</label>
+                            <input  id="mileage"
+                                    th:field="*{mileage}"
+                                    th:errorclass="is-invalid"
+                                    type="number"
+                                    min="0"
+                                    step="1000"
+                                    class="form-control"
+                                    placeholder="Mileage"/>
+                            <div class="error-message text-danger" th:each="error : ${#fields.errors('mileage')}"
+                                 th:text="${error}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-wrapper">
+                            <label for="seats">Seats</label>
+                            <input  id="seats"
+                                    th:field="*{seats}"
+                                    th:errorclass="is-invalid"
+                                    type="number"
+                                    min="2"
+                                    step="1"
+                                    class="form-control"
+                                    placeholder="Number of Seats"/>
+                            <div class="error-message text-danger" th:each="error : ${#fields.errors('seats')}"
+                                 th:text="${error}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-wrapper">
+                            <label for="luggageCapacity">Luggage Capacity</label>
+                            <input id="luggageCapacity"
+                                   th:field="*{luggageCapacity}"
+                                   th:errorclass="is-invalid"
+                                   type="number"
+                                   min="1"
+                                   step="1"
+                                   class="form-control"
+                                   placeholder="Number of bags that fit in the car"/>
+                            <div class="error-message text-danger" th:each="error : ${#fields.errors('luggageCapacity')}"
+                                 th:text="${error}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pricePerHour">Price Per Hour</label>
+                        <input id="pricePerHour"
+                               th:field="*{perHourPrice}"
+                               th:errorclass="is-invalid"
+                               type="number"
+                               min="1" step="1"
+                               class="form-control"
+                               placeholder="Price Per Hour"/>
+                        <div class="error-message text-danger" th:each="error : ${#fields.errors('perHourPrice')}"
+                             th:text="${error}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pricePerDay">Price Per Day</label>
+                        <input id="pricePerDay"
+                               th:field="*{perDayPrice}"
+                               th:errorclass="is-invalid"
+                               type="number"
+                               min="1" step="1"
+                               class="form-control"
+                               placeholder="Price Per Day"/>
+                        <div class="error-message text-danger" th:each="error : ${#fields.errors('perDayPrice')}"
+                             th:text="${error}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pricePerMonth">Price Per Month</label>
+                        <input id="pricePerMonth"
+                               th:field="*{perMonthPrice}"
+                               th:errorclass="is-invalid"
+                               type="number"
+                               min="1" step="1"
+                               class="form-control"
+                               placeholder="Price Per Month"/>
+                        <div class="error-message text-danger" th:each="error : ${#fields.errors('perMonthPrice')}"
+                             th:text="${error}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add Car" class="btn btn-primary py-3 px-5">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- loader -->
+<div th:replace="~{fragments/loader}"></div>
+
+</body>
+</html>

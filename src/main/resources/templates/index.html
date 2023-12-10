@@ -25,33 +25,33 @@
     	<div class="container">
     		<div class="row no-gutters">
     			<div class="col-md-12	featured-top">
-    				<div class="row no-gutters">
-	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
-		          		<h2>Reserve your trip</h2>
-			    				<div class="form-group">
-			    					<label for="" class="label">Pick-up location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="form-group">
-			    					<label for="" class="label">Drop-off location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="d-flex">
-			    					<div class="form-group mr-2">
-			                <label for="" class="label">Pick-up date</label>
-			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
-			              </div>
-			              <div class="form-group ml-2">
-			                <label for="" class="label">Drop-off date</label>
-			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
-			              </div>
-		              </div>
-			            <div class="form-group">
-			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
-			            </div>
-			    			</form>
-	  					</div>
+    				<div class="row no-gutters justify-content-center">
+<!--	  					<div class="col-md-4 d-flex align-items-center">-->
+<!--							<form action="#" class="request-form ftco-animate bg-primary">-->
+<!--								<h2>Reserve your trip</h2>-->
+<!--								<div class="form-group">-->
+<!--									<label for="" class="label">Pick-up location</label>-->
+<!--									<input type="text" class="form-control" placeholder="City, Airport, Station, etc">-->
+<!--								</div>-->
+<!--								<div class="form-group">-->
+<!--			    					<label for="" class="label">Drop-off location</label>-->
+<!--			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">-->
+<!--								</div>-->
+<!--								<div class="d-flex">-->
+<!--									<div class="form-group mr-2">-->
+<!--										<label for="" class="label">Pick-up date</label>-->
+<!--										<input type="text" class="form-control" id="book_pick_date" placeholder="Date">-->
+<!--									</div>-->
+<!--									<div class="form-group ml-2">-->
+<!--										<label for="" class="label">Drop-off date</label>-->
+<!--										<input type="text" class="form-control" id="book_off_date" placeholder="Date">-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="form-group">-->
+<!--									<input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
 	  					<div class="col-md-8 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
 	  							<h3 class="heading-section mb-4">How to Rent The Perfect Car For Your Needs</h3>
@@ -107,7 +107,7 @@
 								</div>
 							  </div>
 							  </div>
-					        <p><a href="#" class="btn btn-primary py-3 px-4">Reserve The Perfect Car</a></p>
+					        <p><a th:href="@{/users/login}" class="btn btn-primary py-3 px-4">Reserve The Perfect Car</a></p>
 	  						</div>
 	  					</div>
 	  				</div>
@@ -118,83 +118,32 @@
 
 
     <section class="ftco-section ftco-no-pt bg-light">
-    	<div class="container">
-    		<div class="row justify-content-center">
-          <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">Top Rated</span>
-            <h2 class="mb-2">Our Top Rated Vehicles</h2>
-          </div>
-        </div>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div class="carousel-car owl-carousel">
-    					<div class="item">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                    <span class="subheading">Top Rated</span>
+                    <h2 class="mb-2">Best Rated Vehicles</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="carousel-car owl-carousel">
+                        <div class="item"
+							 th:each="car : ${bestRated}"
+							 th:object="${car}">
     						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-1.jpg);">
-		    					</div>
+		    					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
+                                </div>
 		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
+		    						<h2 class="mb-0"><a href="car-details.html" th:text="|*{brand} *{model}|"></a></h2>
 		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
+			    						<span class="cat" th:text="*{brand}">Cheverolet</span>
+			    						<p class="price ml-auto" th:text=" '$' + *{pricePerDay} + '/day' ">$500</p>
 		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-						<div class="item">
-							<div class="car-wrap rounded ftco-animate">
-								<div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-1.jpg);">
-								</div>
-								<div class="text">
-									<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-									<div class="d-flex mb-3">
-										<span class="cat">Cheverolet</span>
-										<p class="price ml-auto">$500 <span>/day</span></p>
-									</div>
-									<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-								</div>
-							</div>
-						</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-2.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-3.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-    					</div>
-    					<div class="item">
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style="background-image: url(/images/car-4.jpg);">
-		    					</div>
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">Mercedes Grand Sedan</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">Cheverolet</span>
-			    						<p class="price ml-auto">$500 <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="#" class="btn btn-secondary py-2 ml-1">Details</a></p>
+		    						<p class="d-flex mb-0 d-block">
+										<a href="#" class="btn btn-primary py-2 mr-1">Book now</a>
+										<a th:href="@{/cars/details/{id}(id = *{id})}" class="btn btn-secondary py-2 ml-1">Details</a>
+									</p>
 		    					</div>
 		    				</div>
     					</div>
@@ -245,7 +194,7 @@
             	<div class="icon d-flex align-items-center justify-content-center"><span class="fa-solid fa-person-circle-question"></span></div>
             	<div class="text w-100">
                 <h3 class="heading mb-2">More</h3>
-                <p>To see the other services we offer press the "Services" button on the menu</p>
+                <p>Our friendly personnel will do their best to help you with all the questions you might have about our services!</p>
               </div>
             </div>
 					</div>
@@ -369,8 +318,8 @@
     
   
 
-  <!-- loader -->
-  <div th:replace="~{fragments/loader}"></div>
+    <!-- loader -->
+    <div th:replace="~{fragments/loader}"></div>
     
   </body>
 </html>

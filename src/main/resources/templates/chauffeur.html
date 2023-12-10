@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+   <head th:replace="~{fragments/head}"></head>
+   <body>
+   <nav th:replace="~{fragments/navbar}"></nav>
+   <!-- END nav -->
+
+   <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/chauffeur-top.jpg');" data-stellar-background-ratio="0.5">
+     <div class="overlay"></div>
+     <div class="container">
+       <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+         <div class="col-md-9 ftco-animate pb-5">
+           <p class="breadcrumbs">
+             <span>
+               <a href="/">Home
+                 <i class="fa-solid fa-house"></i>
+               </a>
+             </span>
+           </p>
+           <h1 class="mb-3 bread">Choose A Chauffeur</h1>
+         </div>
+       </div>
+     </div>
+   </section>
+
+
+   <section class="ftco-section bg-light">
+     <div class="container">
+       <div class="row">
+           <div class="col-md-4" th:each="chauffeur : ${allChauffeurs}"
+              th:object="${chauffeur}">
+               <div class="car-wrap rounded ftco-animate">
+                   <div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
+                   </div>
+                   <div class="text">
+                       <h2 class="mb-0"><a href="car-details.html" th:text="|*{name} *{surname}|"></a></h2>
+                       <div class="d-flex mb-3">
+                           <span class="cat" th:text="*{gender}">Gender</span>
+                           <p class="price ml-auto" th:text=" '$' + *{pricePerHour} + '/hour' ">$500</p>
+                       </div>
+                       <div class="d-flex mb-0 d-block">
+                           <form
+                                   th:action="@{/bookings/add/chauffeur/{id}(id = *{id})}"
+                                   th:method="post">
+                               <input type="hidden" name="id" th:value="*{id}">
+                               <button type="submit" class="btn btn-primary py-2 ml-1">Book</button>
+                           </form>
+<!--                           <a href="#" class="btn btn-secondary py-2 ml-1">Details</a>-->
+<!--                           <th:block sec:authorize="hasRole('USER')">-->
+<!--                               <a th:href="@{/reviews/add/{id}(id = *{id})}" class="btn btn-warning py-2 ml-1">Review</a>-->
+<!--                           </th:block>-->
+                           <form
+                                   th:action="@{/chauffeurs/delete/{id}(id = *{id})}"
+                                   th:method="post">
+                               <input type="hidden" name="id" th:value="*{id}">
+                               <th:block sec:authorize="hasRole('ADMIN')">
+                                   <button type="submit" class="btn btn-danger py-2 ml-1">Delete</button>
+                               </th:block>
+                           </form>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+     </div>
+   </section>
+
+
+   <footer th:replace="~{fragments/footer}"></footer>
+
+
+
+   <!-- loader -->
+   <div th:replace="~{fragments/loader}"></div>
+
+   </body>
+</html>

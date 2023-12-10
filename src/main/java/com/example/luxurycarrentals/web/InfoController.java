@@ -14,10 +14,4 @@ public class InfoController {
 
         return "about";
     }
-
-    @GetMapping("/contacts")
-    public String contacts() {
-
-        return "contact";
-    }
 }

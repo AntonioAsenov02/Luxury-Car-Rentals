@@ -1,8 +1,8 @@
 package com.example.luxurycarrentals.config;
 
+import com.example.luxurycarrentals.model.enums.UserRoleEnum;
 import com.example.luxurycarrentals.repoitory.UserRepository;
 import com.example.luxurycarrentals.service.impl.RentalUserDetailsService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,11 +21,6 @@ public class SecurityConfiguration {
     // 2. SecurityFilterChain
     // 3. UserDetailsService
 
-    private final String rememberMeKey;
-
-    public SecurityConfiguration(@Value("${LuxuryCarRentals.remember.me.key}") String rememberMeKey) {
-        this.rememberMeKey = rememberMeKey;
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -36,8 +31,13 @@ public class SecurityConfiguration {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         // Allow anyone to see the home page, the registration page and the login form
                         .requestMatchers("/", "/users/login", "/users/register", "/users/login-error").permitAll()
-                        .requestMatchers("/info/about", "/cars/all").permitAll()
-//                        .requestMatchers("/offers/all").permitAll()
+                        .requestMatchers("/info/about", "/cars/all", "/chauffeurs/all", "cars/pricing").permitAll()
+                        .requestMatchers("/cars/details/*", "profile", "/home").authenticated()
+                        .requestMatchers("/cars/details/api/reviews/*", "/bookings/add").authenticated()
+                        .requestMatchers("/bookings/add/car/*", "/booking/add/chauffeur/*").authenticated()
+                        .requestMatchers("/cars/details/api/pricing", "/maintenance").permitAll()
+                        .requestMatchers("/chauffeurs/add", "/cars/add").hasRole(UserRoleEnum.ADMIN.name())
+                        .requestMatchers("/reviews/add/*").hasRole(UserRoleEnum.USER.name())
 //                        .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated.
                         .anyRequest().authenticated()
@@ -63,14 +63,7 @@ public class SecurityConfiguration {
                             // invalidate the HTTP session
                             .invalidateHttpSession(true);
                 }
-//        ).rememberMe(
-//                rememberMe -> {
-//                    rememberMe
-//                            .key(rememberMeKey)
-//                            .rememberMeParameter("remember-me")
-//                            .rememberMeCookieName("remember-me");
-//                }
-        ).build();
+                ).build();
     }
 
     @Bean

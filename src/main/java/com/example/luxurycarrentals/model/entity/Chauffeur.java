@@ -2,7 +2,7 @@ package com.example.luxurycarrentals.model.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "chauffeurs")
@@ -18,10 +18,13 @@ public class Chauffeur extends BaseEntity {
     private String gender;
     @Column
     private Integer rating;
-    @Column(nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String imageUrl;
-    @OneToOne
-    private Offer offer;
+    @Column(nullable = false)
+    private BigDecimal pricePerHour;
+    //TODO
+//    @OneToMany(fetch = FetchType.EAGER)
+//    private List<Review> reviews;
 
 
 
@@ -79,12 +82,12 @@ public class Chauffeur extends BaseEntity {
         return this;
     }
 
-    public Offer getOffer() {
-        return offer;
+    public BigDecimal getPricePerHour() {
+        return pricePerHour;
     }
 
-    public Chauffeur setOffer(Offer offer) {
-        this.offer = offer;
+    public Chauffeur setPricePerHour(BigDecimal pricePerHour) {
+        this.pricePerHour = pricePerHour;
         return this;
     }
 }

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
   <head th:replace="~{fragments/head}"></head>
   <body>
     <nav th:replace="~{fragments/navbar}"></nav>
@@ -17,7 +19,7 @@
 								<i class="fa-solid fa-house"></i>
 							</a>
 						</span>
-					</p>
+				</p>
 					<h1 class="mb-3 bread">Choose Your Car</h1>
 				</div>
 			</div>
@@ -25,8 +27,8 @@
 	</section>
 		
 
-		<section class="ftco-section bg-light">
-    	<div class="container">
+	<section class="ftco-section bg-light">
+		<div class="container">
     		<div class="row"
 				 th:each="car : ${allCars.getContent()}"
 				 th:object="${car}">
@@ -35,15 +37,35 @@
     					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
     					</div>
     					<div class="text">
-    						<h2 class="mb-0"><a href="car-single.html" th:text="|*{brand} *{model}|"></a></h2>
+    						<h2 class="mb-0"><a href="car-details.html" th:text="|*{brand} *{model}|"></a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat" th:text="*{brand}">Cheverolet</span>
 								<p class="price ml-auto" th:text=" '$' + *{pricePerHour} + '/hour' ">$500</p>
     						</div>
-    						<p class="d-flex mb-0 d-block">
-								<a href="#" class="btn btn-primary py-2 mr-1">Book now</a>
-								<a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a>
-							</p>
+
+							<div class="d-flex mb-0 d-block">
+								<form
+										th:action="@{/bookings/add/car/{id}(id = *{id})}"
+										th:method="post">
+									<input type="hidden" name="id" th:value="*{id}">
+									<button type="submit" class="btn btn-primary py-2 ml-1">Book</button>
+								</form>
+
+								<a th:href="@{/cars/details/{id}(id = *{id})}" class="btn btn-secondary py-2 ml-1">Details</a>
+
+								<th:block sec:authorize="hasRole('USER')">
+									<a th:href="@{/reviews/add/{id}(id = *{id})}" class="btn btn-warning py-2 ml-1">Review</a>
+								</th:block>
+
+								<form
+										th:action="@{/cars/delete/{id}(id = *{id})}"
+										th:method="post">
+									<input type="hidden" name="id" th:value="*{id}">
+									<th:block sec:authorize="hasRole('ADMIN')">
+										<button type="submit" class="btn btn-danger py-2 ml-1">Delete</button>
+									</th:block>
+								</form>
+							</div>
     					</div>
     				</div>
     			</div>
@@ -52,15 +74,34 @@
     					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
     					</div>
     					<div class="text">
-    						<h2 class="mb-0"><a href="car-single.html" th:text="|*{brand} *{model}|">Range Rover</a></h2>
+    						<h2 class="mb-0"><a href="car-details.html" th:text="|*{brand} *{model}|">Range Rover</a></h2>
     						<div class="d-flex mb-3">
 	    						<span class="cat" th:text="*{brand}">Subaru</span>
 	    						<p class="price ml-auto" th:text=" '$' + *{pricePerDay} + '/day' ">$500</p>
     						</div>
-    						<p class="d-flex mb-0 d-block">
-								<a href="#" class="btn btn-primary py-2 mr-1">Book now</a>
-								<a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a>
-							</p>
+
+							<div class="d-flex mb-0 d-block">
+								<form
+										th:action="@{/bookings/add/car/{id}(id = *{id})}"
+										th:method="post">
+									<input type="hidden" name="id" th:value="*{id}">
+									<button type="submit" class="btn btn-primary py-2 ml-1">Book</button>
+								</form>
+
+								<a th:href="@{/cars/details/{id}(id = *{id})}" class="btn btn-secondary py-2 ml-1">Details</a>
+
+								<th:block sec:authorize="hasRole('USER')">
+									<a th:href="@{/reviews/add/{id}(id = *{id})}" class="btn btn-warning py-2 ml-1">Review</a>
+								</th:block>
+								<form
+										th:action="@{/cars/delete/{id}(id = *{id})}"
+										th:method="post">
+									<input type="hidden" name="id" th:value="*{id}">
+									<th:block sec:authorize="hasRole('ADMIN')">
+										<button type="submit" class="btn btn-danger py-2 ml-1">Delete</button>
+									</th:block>
+								</form>
+							</div>
     					</div>
     				</div>
     			</div>
@@ -69,12 +110,34 @@
     					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + *{imageUrl} + ');'">
     					</div>
     					<div class="text">
-    						<h2 class="mb-0"><a href="car-single.html" th:text="|*{brand} *{model}|">Mercedes Grand Sedan</a></h2>
+    						<h2 class="mb-0"><a href="car-details.html" th:text="|*{brand} *{model}|">Mercedes Grand Sedan</a></h2>
     						<div class="d-flex mb-3">
-	    						<span class="cat" th:text="*{brand}">Cheverolet</span>
+	    						<span class="cat" th:text="*{brand}">Mercedes</span>
 	    						<p class="price ml-auto" th:text=" '$' + *{pricePerMonth} + '/month' ">$500</p>
     						</div>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+
+							<div class="d-flex mb-0 d-block">
+								<form
+										th:action="@{/bookings/add/car/{id}(id = *{id})}"
+										th:method="post">
+									<input type="hidden" name="id" th:value="*{id}">
+									<button type="submit" class="btn btn-primary py-2 ml-1">Book</button>
+								</form>
+
+								<a th:href="@{/cars/details/{id}(id = *{id})}" class="btn btn-secondary py-2 ml-1">Details</a>
+
+								<th:block sec:authorize="hasRole('USER')">
+									<a th:href="@{/reviews/add/{id}(id = *{id})}" class="btn btn-warning py-2 ml-1">Review</a>
+								</th:block>
+								<form
+										th:action="@{/cars/delete/{id}(id = *{id})}"
+										th:method="post">
+									<input type="hidden" name="id" th:value="*{id}">
+									<th:block sec:authorize="hasRole('ADMIN')">
+										<button type="submit" class="btn btn-danger py-2 ml-1">Delete</button>
+									</th:block>
+								</form>
+							</div>
     					</div>
     				</div>
     			</div>
@@ -137,10 +200,9 @@
 
     <footer th:replace="~{fragments/footer}"></footer>
     
-  
 
-  <!-- loader -->
-  <div th:replace="~{fragments/loader}"></div>
+    <!-- loader -->
+    <div th:replace="~{fragments/loader}"></div>
     
   </body>
 </html>

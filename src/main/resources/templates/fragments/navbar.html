@@ -17,20 +17,35 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <th:block sec:authorize="isAuthenticated()">
-                    <li class="nav-item"><a href="home.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="/info/about" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-                    <li class="nav-item"><a href="info/contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="/cars/all" class="nav-link">Cars</a></li>
+                    <li class="nav-item"><a href="/chauffeurs/all" class="nav-link">Chauffeurs</a></li>
+                    <li class="nav-item"><a href="/cars/pricing" class="nav-link">Pricing</a></li>
+                    <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+<!--                    <li class="nav-item"><a href="info/contact" class="nav-link">Contact</a></li>-->
                     <li class="nav-item"><a href="/users/logout" class="nav-link">Logout</a></li>
+                    <th:block sec:authorize="hasRole('ADMIN')">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Admin
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/chauffeurs/add">Add Chauffeur</a>
+                                <a class="dropdown-item" href="/cars/add">Add Car</a>
+                            </div>
+                        </div>
+                    </th:block>
+
                 </th:block>
 
                 <th:block sec:authorize="!isAuthenticated()">
                     <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                     <li class="nav-item"><a th:href="@{/info/about}" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="/cars/all" class="nav-link">Cars</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="/info/contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="/chauffeurs/all" class="nav-link">Chauffeurs</a></li>
+                    <li class="nav-item"><a href="/cars/pricing" class="nav-link">Pricing</a></li>
+<!--                    <li class="nav-item"><a href="/info/contact" class="nav-link">Contact</a></li>-->
                     <li class="nav-item"><a href="/users/login" class="nav-link">Login</a></li>
                     <li class="nav-item"><a href="/users/register" class="nav-link">Register</a></li>
                 </th:block>

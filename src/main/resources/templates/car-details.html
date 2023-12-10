@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head}"></head>
+  <body>
+    <nav th:replace="~{fragments/navbar}"></nav>
+    <!-- END nav -->
+    
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_4.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+          <div class="col-md-9 ftco-animate pb-5">
+          	<p class="breadcrumbs">
+				<span class="mr-2">
+					<a href="/">Home
+						<i class="fa-solid fa-house"></i>
+					</a>
+				</span>
+				<span>Car details
+					<i class="fa-solid fa-car-side"></i>
+				</span>
+			</p>
+            <h1 class="mb-3 bread">Car Details</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+
+	<section class="ftco-section ftco-car-details">
+      <div class="container" th:object="${car}" id="carId" th:value="*{id}">
+      	<div class="row justify-content-center">
+      		<div class="col-md-12">
+      			<div class="car-details">
+      				<div class="img rounded" th:style="'background-image: url(' + *{imageUrl} + ');'"></div>
+      				<div class="text text-center">
+      					<span class="subheading" th:text="*{brand}">Porsche</span>
+      					<h2 th:text="|*{brand} *{model}|">Mercedes Grand Sedan</h2>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      	<div class="row">
+      		<div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center">
+						<span class="fa-solid fa-gauge-high"></span>
+					</div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Mileage
+		                	<span th:text="|*{mileage} km|">40,000</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center">
+						<span class="fa-solid fa-gears"></span>
+					</div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Transmission
+		                	<span th:text="*{transmission}">Manual</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center">
+						<span class="fa-solid fa-users-line"></span>
+					</div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Seats
+		                	<span th:text="|*{seats} Adults|" >5 Adults</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center">
+						<span class="fa-solid fa-suitcase"></span>
+					</div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Luggage
+		                	<span th:text="|*{luggageCapacity} bags|">4 Bags</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center">
+						<span class="fa-solid fa-gas-pump"></span>
+					</div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Fuel
+		                	<span th:text="*{fuel}">Petrol</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+      	</div>
+      	<div class="row">
+      		<div class="col-md-12 pills">
+						<div class="bd-example bd-example-tabs">
+							<div class="d-flex justify-content-center">
+							  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+							    <li class="nav-item">
+							      <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Features</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
+							    </li>
+							    <li class="nav-item">
+							      <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
+							    </li>
+							  </ul>
+							</div>
+
+						  <div class="tab-content" id="pills-tabContent">
+						    <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+						    	<div class="row">
+						    		<div class="col-md-4">
+						    			<ul class="features">
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Air-conditioning</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>GPS</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Luggage</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Music</li>
+						    			</ul>
+						    		</div>
+						    		<div class="col-md-4">
+						    			<ul class="features">
+						    				<li class="remove"><span class="fa-solid fa-square-xmark"></span>Sleeping Bed</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Multimedia</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Bluetooth</li>
+						    				<li class="remove"><span class="fa-solid fa-square-xmark"></span>Water</li>
+						    			</ul>
+						    		</div>
+						    		<div class="col-md-4">
+						    			<ul class="features">
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Audio input</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Car Kit</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Remote central locking</li>
+						    				<li class="check"><span class="fa-solid fa-square-check"></span>Climate control</li>
+						    			</ul>
+						    		</div>
+						    	</div>
+						    </div>
+
+						    <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+						      <p th:text="*{description}">Description</p>
+						    </div>
+
+						    <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+						      <div class="row" id="reviews-container">
+
+							  </div>
+							</div>
+						  </div>
+						</div>
+			</div>
+		</div>
+	  </div>
+	</section>
+
+
+  <footer th:replace="~{fragments/footer}"></footer>
+
+  <!-- loader -->
+  <div th:replace="~{fragments/loader}"></div>
+    
+  </body>
+</html>

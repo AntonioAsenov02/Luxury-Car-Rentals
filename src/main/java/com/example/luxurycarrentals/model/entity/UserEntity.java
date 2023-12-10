@@ -17,7 +17,9 @@ public class UserEntity extends BaseEntity {
     private String email;
     @Column(nullable = false)
     private String password;
-    @OneToMany(fetch = FetchType.EAGER)
+    @Column
+    private String imageUrl;
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -60,6 +62,15 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public UserEntity setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 

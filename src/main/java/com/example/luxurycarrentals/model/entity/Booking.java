@@ -1,8 +1,11 @@
 package com.example.luxurycarrentals.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bookings")
@@ -15,9 +18,10 @@ public class Booking extends BaseEntity {
     @Column(nullable = false)
     private String dropOffLocation;
     @Column(nullable = false)
-    private LocalDate pickUpDate;
+    private LocalDateTime pickUpDate;
     @Column(nullable = false)
-    private LocalDate dropOffDate;
+    private LocalDateTime dropOffDate;
+    private BigDecimal price;
     @ManyToOne
     private UserEntity userEntity;
     @ManyToOne
@@ -63,21 +67,39 @@ public class Booking extends BaseEntity {
         return this;
     }
 
-    public LocalDate getPickUpDate() {
+    public LocalDateTime getPickUpDate() {
         return pickUpDate;
     }
 
-    public Booking setPickUpDate(LocalDate pickUpDate) {
+    public Booking setPickUpDate(LocalDateTime pickUpDate) {
         this.pickUpDate = pickUpDate;
         return this;
     }
 
-    public LocalDate getDropOffDate() {
+    public LocalDateTime getDropOffDate() {
         return dropOffDate;
     }
 
-    public Booking setDropOffDate(LocalDate dropOffDate) {
+    public Booking setDropOffDate(LocalDateTime dropOffDate) {
         this.dropOffDate = dropOffDate;
+        return this;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Booking setPrice(BigDecimal price) {
+        this.price = price;
+        return this;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public Booking setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
         return this;
     }
 
